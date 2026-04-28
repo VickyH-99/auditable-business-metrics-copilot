@@ -1,0 +1,270 @@
+{
+  "metrics": [
+    {
+      "metric_id": "total_delivery_count",
+      "name_zh": "总交车量",
+      "name_en": "Total Delivery Count",
+      "description": "按 statistics_date 统计的已完成交付订单量。",
+      "table": "fact_delivery_orders",
+      "time_field": "statistics_date",
+      "aggregation": {
+        "type": "count_distinct",
+        "field": "order_id"
+      },
+      "default_filters": {
+        "order_status": "completed"
+      },
+      "allowed_dimensions": [
+        "channel",
+        "region_group",
+        "region",
+        "city",
+        "store_name",
+        "sales_person_name",
+        "business_type",
+        "statistics_date"
+      ],
+      "formula": "COUNT(DISTINCT order_id)",
+      "owner": "BI Team",
+      "update_frequency": "daily",
+      "aliases": [
+        "交车",
+        "交车量",
+        "交付",
+        "交付量"
+      ]
+    },
+    {
+      "metric_id": "car_sales_count",
+      "name_zh": "卖车销量",
+      "name_en": "Car Sales Count",
+      "description": "已完成卖车业务订单量。",
+      "table": "fact_delivery_orders",
+      "time_field": "statistics_date",
+      "aggregation": {
+        "type": "count_distinct",
+        "field": "order_id"
+      },
+      "default_filters": {
+        "order_status": "completed",
+        "business_type": "sale"
+      },
+      "allowed_dimensions": [
+        "channel",
+        "region_group",
+        "region",
+        "city",
+        "store_name",
+        "sales_person_name",
+        "business_type",
+        "statistics_date"
+      ],
+      "formula": "COUNT(DISTINCT order_id) WHERE business_type = 'sale'",
+      "owner": "Sales Ops",
+      "update_frequency": "daily",
+      "aliases": [
+        "卖车",
+        "卖车销量",
+        "卖车量",
+        "新车销量"
+      ]
+    },
+    {
+      "metric_id": "rental_count",
+      "name_zh": "租车销量",
+      "name_en": "Rental Count",
+      "description": "已完成租车业务订单量。",
+      "table": "fact_delivery_orders",
+      "time_field": "statistics_date",
+      "aggregation": {
+        "type": "count_distinct",
+        "field": "order_id"
+      },
+      "default_filters": {
+        "order_status": "completed",
+        "business_type": "rental"
+      },
+      "allowed_dimensions": [
+        "channel",
+        "region_group",
+        "region",
+        "city",
+        "store_name",
+        "sales_person_name",
+        "business_type",
+        "statistics_date"
+      ],
+      "formula": "COUNT(DISTINCT order_id) WHERE business_type = 'rental'",
+      "owner": "Rental Ops",
+      "update_frequency": "daily",
+      "aliases": [
+        "租车",
+        "租车量",
+        "租赁"
+      ]
+    },
+    {
+      "metric_id": "used_car_count",
+      "name_zh": "二手车销量",
+      "name_en": "Used Car Count",
+      "description": "已完成二手车业务订单量。",
+      "table": "fact_delivery_orders",
+      "time_field": "statistics_date",
+      "aggregation": {
+        "type": "count_distinct",
+        "field": "order_id"
+      },
+      "default_filters": {
+        "order_status": "completed",
+        "business_type": "used_car"
+      },
+      "allowed_dimensions": [
+        "channel",
+        "region_group",
+        "region",
+        "city",
+        "store_name",
+        "sales_person_name",
+        "business_type",
+        "statistics_date"
+      ],
+      "formula": "COUNT(DISTINCT order_id) WHERE business_type = 'used_car'",
+      "owner": "Used Car Ops",
+      "update_frequency": "daily",
+      "aliases": [
+        "二手车",
+        "二手车销量"
+      ]
+    },
+    {
+      "metric_id": "renewal_count",
+      "name_zh": "续租量",
+      "name_en": "Renewal Count",
+      "description": "已完成续租业务订单量。",
+      "table": "fact_delivery_orders",
+      "time_field": "statistics_date",
+      "aggregation": {
+        "type": "count_distinct",
+        "field": "order_id"
+      },
+      "default_filters": {
+        "order_status": "completed",
+        "business_type": "renewal"
+      },
+      "allowed_dimensions": [
+        "channel",
+        "region_group",
+        "region",
+        "city",
+        "store_name",
+        "sales_person_name",
+        "business_type",
+        "statistics_date"
+      ],
+      "formula": "COUNT(DISTINCT order_id) WHERE business_type = 'renewal'",
+      "owner": "Subscription Ops",
+      "update_frequency": "daily",
+      "aliases": [
+        "续租",
+        "续租量"
+      ]
+    },
+    {
+      "metric_id": "sales_amount",
+      "name_zh": "销售金额",
+      "name_en": "Sales Amount",
+      "description": "已完成订单的销售金额总和。",
+      "table": "fact_delivery_orders",
+      "time_field": "statistics_date",
+      "aggregation": {
+        "type": "sum",
+        "field": "sales_amount"
+      },
+      "default_filters": {
+        "order_status": "completed"
+      },
+      "allowed_dimensions": [
+        "channel",
+        "region_group",
+        "region",
+        "city",
+        "store_name",
+        "sales_person_name",
+        "business_type",
+        "statistics_date"
+      ],
+      "formula": "SUM(sales_amount)",
+      "owner": "Finance BP",
+      "update_frequency": "daily",
+      "aliases": [
+        "销售金额",
+        "销售额",
+        "GMV"
+      ]
+    },
+    {
+      "metric_id": "gross_profit",
+      "name_zh": "毛利",
+      "name_en": "Gross Profit",
+      "description": "已完成订单的毛利总和。",
+      "table": "fact_delivery_orders",
+      "time_field": "statistics_date",
+      "aggregation": {
+        "type": "sum",
+        "field": "gross_profit"
+      },
+      "default_filters": {
+        "order_status": "completed"
+      },
+      "allowed_dimensions": [
+        "channel",
+        "region_group",
+        "region",
+        "city",
+        "store_name",
+        "sales_person_name",
+        "business_type",
+        "statistics_date"
+      ],
+      "formula": "SUM(gross_profit)",
+      "owner": "Finance BP",
+      "update_frequency": "daily",
+      "aliases": [
+        "毛利"
+      ]
+    },
+    {
+      "metric_id": "average_order_value",
+      "name_zh": "平均订单金额",
+      "name_en": "Average Order Value",
+      "description": "销售金额 / 已完成订单数。",
+      "table": "fact_delivery_orders",
+      "time_field": "statistics_date",
+      "aggregation": {
+        "type": "average_order_value",
+        "field": "sales_amount"
+      },
+      "default_filters": {
+        "order_status": "completed"
+      },
+      "allowed_dimensions": [
+        "channel",
+        "region_group",
+        "region",
+        "city",
+        "store_name",
+        "sales_person_name",
+        "business_type",
+        "statistics_date"
+      ],
+      "formula": "SUM(sales_amount) / COUNT(DISTINCT order_id)",
+      "owner": "Finance BP",
+      "update_frequency": "daily",
+      "aliases": [
+        "客单价",
+        "平均订单金额"
+      ]
+    }
+  ]
+}
+
